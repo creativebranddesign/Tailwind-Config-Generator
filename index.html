@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind CSS Config Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tailwind CSS Config Generator</h1>
+            <p>Configure your Tailwind settings and generate your _tw.css file</p>
+        </header>
+
+        <main>
+            <form id="configForm">
+                <div class="form-section">
+                    <h2>Colors</h2>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="color-black">Black:</label>
+                            <input type="color" id="color-black" name="colorBlack" value="#000000">
+                            <span class="help-text">Default: #000</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color-white">White:</label>
+                            <input type="color" id="color-white" name="colorWhite" value="#ffffff">
+                            <span class="help-text">Default: #fff</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color-dark">Dark:</label>
+                            <input type="color" id="color-dark" name="colorDark" value="#111111">
+                            <span class="help-text">Default: #111</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color-light">Light:</label>
+                            <input type="color" id="color-light" name="colorLight" value="#f5f5f5">
+                            <span class="help-text">Default: #f5f5f5</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color-primary">Primary:</label>
+                            <input type="color" id="color-primary" name="colorPrimary" value="#667eea">
+                            <span class="help-text">Choose your primary color</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color-secondary">Secondary:</label>
+                            <input type="color" id="color-secondary" name="colorSecondary" value="#764ba2">
+                            <span class="help-text">Choose your secondary color</span>
+                        </div>
+                    </div>
+
+                    <div class="custom-colors-section">
+                        <h3>Custom Colors</h3>
+                        <div id="customColorsContainer"></div>
+                        <button type="button" id="addColorBtn" class="btn btn-add">+ Add Custom Color</button>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Spacing</h2>
+                    <p class="section-info">
+                        Define your spacing scale. The gutter size sets the minimum value for responsive spacing.
+                        All spacing values automatically scale based on viewport width (calculated from 1920px).
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 650px; margin-bottom: 30px;">
+                        <div class="form-group">
+                            <label for="spacing-gutter">Gutter Size (px):</label>
+                            <input type="number" id="spacing-gutter" name="spacingGutter" value="30" min="0" step="1" placeholder="e.g., 30">
+                            <span class="help-text">Minimum spacing value (30px = 3rem)</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="container-margin">Container Margin (px):</label>
+                            <input type="number" id="container-margin" name="containerMargin" value="100" min="0" step="1" placeholder="e.g., 100">
+                            <span class="help-text">Side margin for container (100px = 89.58% width)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="spacing-xl">Extra Large (xl):</label>
+                            <input type="number" id="spacing-xl" name="spacingXl" value="200" min="0" step="1" placeholder="e.g., 200">
+                            <span class="help-text">200px spacing</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="spacing-lg">Large (lg):</label>
+                            <input type="number" id="spacing-lg" name="spacingLg" value="140" min="0" step="1" placeholder="e.g., 140">
+                            <span class="help-text">140px spacing</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="spacing-md">Medium (md):</label>
+                            <input type="number" id="spacing-md" name="spacingMd" value="100" min="0" step="1" placeholder="e.g., 100">
+                            <span class="help-text">100px spacing</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="spacing-sm">Small (sm):</label>
+                            <input type="number" id="spacing-sm" name="spacingSm" value="80" min="0" step="1" placeholder="e.g., 80">
+                            <span class="help-text">80px spacing</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="spacing-xs">Extra Small (xs):</label>
+                            <input type="number" id="spacing-xs" name="spacingXs" value="60" min="0" step="1" placeholder="e.g., 60">
+                            <span class="help-text">60px spacing</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="spacing-min">Minimum (min):</label>
+                            <input type="number" id="spacing-min" name="spacingMin" value="40" min="0" step="1" placeholder="e.g., 40">
+                            <span class="help-text">40px spacing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Border Radius</h2>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="radius-xl">Extra Large (xl):</label>
+                            <input type="number" id="radius-xl" name="radiusXl" value="160" min="0" step="1" placeholder="Enter value in px">
+                            <span class="help-text">Default: 160px = 16rem</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="radius-lg">Large (lg):</label>
+                            <input type="number" id="radius-lg" name="radiusLg" value="80" min="0" step="1" placeholder="Enter value in px">
+                            <span class="help-text">Default: 80px = 8rem</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="radius-md">Medium (md):</label>
+                            <input type="number" id="radius-md" name="radiusMd" value="40" min="0" step="1" placeholder="Enter value in px">
+                            <span class="help-text">Default: 40px = 4rem</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="radius-sm">Small (sm):</label>
+                            <input type="number" id="radius-sm" name="radiusSm" value="25" min="0" step="1" placeholder="Enter value in px">
+                            <span class="help-text">Default: 25px = 2.5rem</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="radius-xs">Extra Small (xs):</label>
+                            <input type="number" id="radius-xs" name="radiusXs" value="15" min="0" step="1" placeholder="Enter value in px">
+                            <span class="help-text">Default: 15px = 1.5rem</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="radius-min">Minimum (min):</label>
+                            <input type="number" id="radius-min" name="radiusMin" value="5" min="0" step="1" placeholder="Enter value in px">
+                            <span class="help-text">Default: 5px = 0.5rem</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Font Family</h2>
+                    <p class="section-info">
+                        Visit <a href="https://modernfontstacks.com/" target="_blank" rel="noopener noreferrer">Modern Font Stacks</a>
+                        to select a font stack and place it after your desired font family.
+                    </p>
+
+                    <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="form-group">
+                            <label for="font-body">Body Font:</label>
+                            <input type="text" id="font-body" name="fontBody" value="system-ui, sans-serif" placeholder="e.g., Arial, system-ui, sans-serif">
+                            <span class="help-text">Default: system-ui, sans-serif</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="font-headings">Heading Font (optional):</label>
+                            <input type="text" id="font-headings" name="fontHeadings" placeholder="e.g., Georgia, serif">
+                            <span class="help-text">Leave empty to use body font for headings</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Font Sizes</h2>
+                    <p class="section-info">
+                        Define up to 10 responsive font sizes. Sizes are automatically sorted from largest (text-0) to smallest.
+                        Font sizes above 16px will scale responsively between 1.8rem-5rem. Sizes 16px and below remain fixed.
+                    </p>
+
+                    <div id="fontSizesContainer">
+                        <div class="font-size-item">
+                            <div class="form-group">
+                                <label for="fontSize-1-size">Size (px):</label>
+                                <input type="number" id="fontSize-1-size" name="fontSize1Size" min="0" step="1" placeholder="120">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-1-weight">Weight (optional):</label>
+                                <input type="number" id="fontSize-1-weight" name="fontSize1Weight" min="100" max="900" step="100" placeholder="e.g., 400">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-1-lineHeight">Line Height (optional):</label>
+                                <input type="number" id="fontSize-1-lineHeight" name="fontSize1LineHeight" min="0" step="0.1" placeholder="e.g., 1.3">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-1-letterSpacing">Letter Spacing (optional):</label>
+                                <input type="text" id="fontSize-1-letterSpacing" name="fontSize1LetterSpacing" placeholder="e.g., 0.02em">
+                            </div>
+                        </div>
+
+                        <div class="font-size-item hidden">
+                            <div class="form-group">
+                                <label for="fontSize-2-size">Size (px):</label>
+                                <input type="number" id="fontSize-2-size" name="fontSize2Size" min="0" step="1" placeholder="100">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-2-weight">Weight (optional):</label>
+                                <input type="number" id="fontSize-2-weight" name="fontSize2Weight" min="100" max="900" step="100" placeholder="e.g., 400">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-2-lineHeight">Line Height (optional):</label>
+                                <input type="number" id="fontSize-2-lineHeight" name="fontSize2LineHeight" min="0" step="0.1" placeholder="e.g., 1.3">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-2-letterSpacing">Letter Spacing (optional):</label>
+                                <input type="text" id="fontSize-2-letterSpacing" name="fontSize2LetterSpacing" placeholder="e.g., 0.02em">
+                            </div>
+                        </div>
+
+                        <div class="font-size-item hidden">
+                            <div class="form-group">
+                                <label for="fontSize-3-size">Size (px):</label>
+                                <input type="number" id="fontSize-3-size" name="fontSize3Size" min="0" step="1" placeholder="80">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-3-weight">Weight (optional):</label>
+                                <input type="number" id="fontSize-3-weight" name="fontSize3Weight" min="100" max="900" step="100" placeholder="e.g., 400">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-3-lineHeight">Line Height (optional):</label>
+                                <input type="number" id="fontSize-3-lineHeight" name="fontSize3LineHeight" min="0" step="0.1" placeholder="e.g., 1.3">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-3-letterSpacing">Letter Spacing (optional):</label>
+                                <input type="text" id="fontSize-3-letterSpacing" name="fontSize3LetterSpacing" placeholder="e.g., 0.02em">
+                            </div>
+                        </div>
+
+                        <div class="font-size-item hidden">
+                            <div class="form-group">
+                                <label for="fontSize-4-size">Size (px):</label>
+                                <input type="number" id="fontSize-4-size" name="fontSize4Size" min="0" step="1" placeholder="60">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-4-weight">Weight (optional):</label>
+                                <input type="number" id="fontSize-4-weight" name="fontSize4Weight" min="100" max="900" step="100" placeholder="e.g., 400">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-4-lineHeight">Line Height (optional):</label>
+                                <input type="number" id="fontSize-4-lineHeight" name="fontSize4LineHeight" min="0" step="0.1" placeholder="e.g., 1.3">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-4-letterSpacing">Letter Spacing (optional):</label>
+                                <input type="text" id="fontSize-4-letterSpacing" name="fontSize4LetterSpacing" placeholder="e.g., 0.02em">
+                            </div>
+                        </div>
+
+                        <div class="font-size-item hidden">
+                            <div class="form-group">
+                                <label for="fontSize-5-size">Size (px):</label>
+                                <input type="number" id="fontSize-5-size" name="fontSize5Size" min="0" step="1" placeholder="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-5-weight">Weight (optional):</label>
+                                <input type="number" id="fontSize-5-weight" name="fontSize5Weight" min="100" max="900" step="100" placeholder="e.g., 400">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-5-lineHeight">Line Height (optional):</label>
+                                <input type="number" id="fontSize-5-lineHeight" name="fontSize5LineHeight" min="0" step="0.1" placeholder="e.g., 1.3">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-5-letterSpacing">Letter Spacing (optional):</label>
+                                <input type="text" id="fontSize-5-letterSpacing" name="fontSize5LetterSpacing" placeholder="e.g., 0.02em">
+                            </div>
+                        </div>
+
+                        <div class="font-size-item hidden">
+                            <div class="form-group">
+                                <label for="fontSize-6-size">Size (px):</label>
+                                <input type="number" id="fontSize-6-size" name="fontSize6Size" min="0" step="1" placeholder="40">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-6-weight">Weight (optional):</label>
+                                <input type="number" id="fontSize-6-weight" name="fontSize6Weight" min="100" max="900" step="100" placeholder="e.g., 400">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-6-lineHeight">Line Height (optional):</label>
+                                <input type="number" id="fontSize-6-lineHeight" name="fontSize6LineHeight" min="0" step="0.1" placeholder="e.g., 1.3">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-6-letterSpacing">Letter Spacing (optional):</label>
+                                <input type="text" id="fontSize-6-letterSpacing" name="fontSize6LetterSpacing" placeholder="e.g., 0.02em">
+                            </div>
+                        </div>
+
+                        <div class="font-size-item hidden">
+                            <div class="form-group">
+                                <label for="fontSize-7-size">Size (px):</label>
+                                <input type="number" id="fontSize-7-size" name="fontSize7Size" min="0" step="1" placeholder="30">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-7-weight">Weight (optional):</label>
+                                <input type="number" id="fontSize-7-weight" name="fontSize7Weight" min="100" max="900" step="100">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-7-lineHeight">Line Height (optional):</label>
+                                <input type="number" id="fontSize-7-lineHeight" name="fontSize7LineHeight" min="0" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-7-letterSpacing">Letter Spacing (optional):</label>
+                                <input type="text" id="fontSize-7-letterSpacing" name="fontSize7LetterSpacing">
+                            </div>
+                        </div>
+
+                        <div class="font-size-item hidden">
+                            <div class="form-group">
+                                <label for="fontSize-8-size">Size (px):</label>
+                                <input type="number" id="fontSize-8-size" name="fontSize8Size" min="0" step="1" placeholder="20">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-8-weight">Weight (optional):</label>
+                                <input type="number" id="fontSize-8-weight" name="fontSize8Weight" min="100" max="900" step="100">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-8-lineHeight">Line Height (optional):</label>
+                                <input type="number" id="fontSize-8-lineHeight" name="fontSize8LineHeight" min="0" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-8-letterSpacing">Letter Spacing (optional):</label>
+                                <input type="text" id="fontSize-8-letterSpacing" name="fontSize8LetterSpacing">
+                            </div>
+                        </div>
+
+                        <div class="font-size-item hidden">
+                            <div class="form-group">
+                                <label for="fontSize-9-size">Size (px):</label>
+                                <input type="number" id="fontSize-9-size" name="fontSize9Size" min="0" step="1" placeholder="18">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-9-weight">Weight (optional):</label>
+                                <input type="number" id="fontSize-9-weight" name="fontSize9Weight" min="100" max="900" step="100">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-9-lineHeight">Line Height (optional):</label>
+                                <input type="number" id="fontSize-9-lineHeight" name="fontSize9LineHeight" min="0" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-9-letterSpacing">Letter Spacing (optional):</label>
+                                <input type="text" id="fontSize-9-letterSpacing" name="fontSize9LetterSpacing">
+                            </div>
+                        </div>
+
+                        <div class="font-size-item hidden">
+                            <div class="form-group">
+                                <label for="fontSize-10-size">Size (px):</label>
+                                <input type="number" id="fontSize-10-size" name="fontSize10Size" min="0" step="1" placeholder="14">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-10-weight">Weight (optional):</label>
+                                <input type="number" id="fontSize-10-weight" name="fontSize10Weight" min="100" max="900" step="100">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-10-lineHeight">Line Height (optional):</label>
+                                <input type="number" id="fontSize-10-lineHeight" name="fontSize10LineHeight" min="0" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="fontSize-10-letterSpacing">Letter Spacing (optional):</label>
+                                <input type="text" id="fontSize-10-letterSpacing" name="fontSize10LetterSpacing">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="addFontSizeBtn" class="btn btn-add">+ Add Font Size</button>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" id="generateBtn" class="btn btn-primary">Generate Config</button>
+                    <button type="button" id="downloadBtn" class="btn btn-secondary" disabled>Download _tw.css</button>
+                </div>
+            </form>
+
+            <div class="preview-section">
+                <h2>Preview</h2>
+                <div class="code-preview">
+                    <pre id="configPreview"><code>/* Your generated Tailwind config will appear here */</code></pre>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
