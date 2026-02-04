@@ -28,17 +28,25 @@ let customColorCounter = 0;
 // Store generated config
 let generatedConfig = '';
 
+// Cache DOM elements for better performance
+const DOM = {};
+
 // Initialize app
 document.addEventListener('DOMContentLoaded', function() {
-    const generateBtn = document.getElementById('generateBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const addColorBtn = document.getElementById('addColorBtn');
-    const addFontSizeBtn = document.getElementById('addFontSizeBtn');
+    // Cache frequently used DOM elements
+    DOM.generateBtn = document.getElementById('generateBtn');
+    DOM.downloadBtn = document.getElementById('downloadBtn');
+    DOM.addColorBtn = document.getElementById('addColorBtn');
+    DOM.addFontSizeBtn = document.getElementById('addFontSizeBtn');
+    DOM.configForm = document.getElementById('configForm');
+    DOM.configPreview = document.getElementById('configPreview');
+    DOM.customColorsContainer = document.getElementById('customColorsContainer');
+    DOM.fontSizesContainer = document.getElementById('fontSizesContainer');
 
-    generateBtn.addEventListener('click', generateConfig);
-    downloadBtn.addEventListener('click', downloadConfig);
-    addColorBtn.addEventListener('click', addCustomColor);
-    addFontSizeBtn.addEventListener('click', showNextFontSize);
+    DOM.generateBtn.addEventListener('click', generateConfig);
+    DOM.downloadBtn.addEventListener('click', downloadConfig);
+    DOM.addColorBtn.addEventListener('click', addCustomColor);
+    DOM.addFontSizeBtn.addEventListener('click', showNextFontSize);
 });
 
 // Helper function to format numbers (removes trailing .0 and handles zero)
@@ -49,8 +57,7 @@ function formatNumber(num) {
 
 // Generate Tailwind config from form inputs
 function generateConfig() {
-    const form = document.getElementById('configForm');
-    const formData = new FormData(form);
+    const formData = new FormData(DOM.configForm);
 
     // Start building the config file content
     let configContent = '/* Tailwind CSS Configuration */\n';
@@ -345,20 +352,21 @@ function generateConfig() {
     updatePreview(configContent);
 
     // Enable download button
-    document.getElementById('downloadBtn').disabled = false;
+    DOM.downloadBtn.disabled = false;
 }
+
+// Reusable element for escaping HTML (performance optimization)
+const tempDiv = document.createElement('div');
 
 // Update the preview area
 function updatePreview(content) {
-    const previewElement = document.getElementById('configPreview');
-    previewElement.innerHTML = `<code>${escapeHtml(content)}</code>`;
+    DOM.configPreview.innerHTML = `<code>${escapeHtml(content)}</code>`;
 }
 
-// Escape HTML for display
+// Escape HTML for display (optimized with reusable element)
 function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+    tempDiv.textContent = text;
+    return tempDiv.innerHTML;
 }
 
 // Download the generated config file
@@ -383,7 +391,6 @@ function downloadConfig() {
 
 // Add a custom color input
 function addCustomColor() {
-    const container = document.getElementById('customColorsContainer');
     const colorId = `custom-color-${customColorCounter++}`;
 
     // Create custom color item
@@ -440,7 +447,7 @@ function addCustomColor() {
     colorItem.appendChild(removeBtn);
 
     // Add to container
-    container.appendChild(colorItem);
+    DOM.customColorsContainer.appendChild(colorItem);
 }
 
 // Remove a custom color input
@@ -462,7 +469,7 @@ function showNextFontSize() {
 
         // If no more hidden items, hide the button
         if (hiddenItems.length === 1) {
-            document.getElementById('addFontSizeBtn').style.display = 'none';
+            DOM.addFontSizeBtn.style.display = 'none';
         }
     }
 }
