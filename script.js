@@ -210,6 +210,7 @@ function generateConfig() {
         }
     }
 
+    configContent += `  --spacing-gutter: ${gutterRem}${gutterUnit};\n`;
     configContent += '  --spacing-full: 100%;\n\n';
 
     // Container Gap Section
