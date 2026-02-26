@@ -19,7 +19,7 @@ const colorMapping = {
 
 const fontMapping = {
     'fontBody': '--font-body',
-    'fontHeadings': '--font-headings'
+    'fontHeadings': '--font-heading'
 };
 
 // Counter for custom color IDs
@@ -100,7 +100,7 @@ function generateConfig() {
     }
 
     if (fontHeadings && fontHeadings.trim() !== '') {
-        configContent += `  --font-headings:\n    ${fontHeadings};\n`;
+        configContent += `  --font-heading:\n    ${fontHeadings};\n`;
     }
 
     configContent += '\n';
